@@ -1,0 +1,16 @@
+import uvicorn
+from fastapi import FastAPI
+from controller.register_controller import router as register_router
+from controller.auth_controller import router as auth_router
+from controller.password_controller import router as password_reset_router
+
+app = FastAPI(
+    title="Auth Application API",
+    description="Fast API application for authentication handling using KeyCloak",
+    version="1.0.0",
+)
+
+app.include_router(register_router)
+app.include_router(auth_router)
+app.include_router(password_reset_router)
+
