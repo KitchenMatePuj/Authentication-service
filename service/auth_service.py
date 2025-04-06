@@ -5,7 +5,6 @@ from applicationProperties import ApplicationProperties
 
 async def authenticate_user(form_data: OAuth2PasswordRequestForm):
     token_url = f"{ApplicationProperties.KEYCLOAK_URL}/realms/{ApplicationProperties.REALM_NAME}/protocol/openid-connect/token"
-    print("Token URL:", token_url)
 
     data = {
         "grant_type": "password",
@@ -14,9 +13,6 @@ async def authenticate_user(form_data: OAuth2PasswordRequestForm):
         "username": form_data.username,
         "password": form_data.password,
     }
-
-    print("Token URL:", form_data.username)
-    print("Token URL:", form_data.password)
 
     async with httpx.AsyncClient() as client:
         response = await client.post(token_url, data=data)
