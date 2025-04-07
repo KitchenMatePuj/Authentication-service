@@ -6,6 +6,7 @@ load_dotenv()
 class ApplicationProperties:
     KEYCLOAK_ADMIN_PASSWORD = os.getenv("KEYCLOAK_ADMIN_PASSWORD")
     KEYCLOAK_ADMIN_USERNAME = os.getenv("KEYCLOAK_ADMIN_USERNAME")
+    WEB_URL = os.getenv("WEB_URL")
     KEYCLOAK_URL = os.getenv("KEYCLOAK_URL")
     REALM_NAME = os.getenv("REALM_NAME")
     KEYCLOAK_CLIENT_ID = os.getenv("KEYCLOAK_CLIENT_ID")
