@@ -13,9 +13,7 @@ app = FastAPI(
     version="1.0.0",
 )
 
-origins = [
-    ApplicationProperties.WEB_URL
-]
+origins = ["*"]
 
 app.add_middleware(
     CORSMiddleware,
