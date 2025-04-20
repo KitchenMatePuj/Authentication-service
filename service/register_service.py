@@ -21,12 +21,14 @@ async def register_user_service(user: RegisterRequest):
     }
 
     async with httpx.AsyncClient() as client:
+        # Obtener token de administrador
         admin_response = await client.post(admin_token_url, data=admin_data)
         if admin_response.status_code != 200:
             raise HTTPException(status_code=500, detail="Error al obtener el token de administrador")
 
         admin_token = admin_response.json().get("access_token")
 
+        # Crear usuario en Keycloak
         user_data = {
             "username": user.username,
             "email": user.email,
@@ -43,4 +45,18 @@ async def register_user_service(user: RegisterRequest):
             error_detail = user_response.text
             raise HTTPException(status_code=400, detail=f"Error al registrar el usuario: {error_detail}")
 
-    return {"message": "Usuario registrado exitosamente"}
+        # Obtener JWT del usuario recién registrado
+        token_data = {
+            "grant_type": "password",
+            "client_id": ApplicationProperties.KEYCLOAK_CLIENT_ID,
+            "client_secret": ApplicationProperties.CLIENT_SECRET,
+            "username": user.username,
+            "password": user.password
+        }
+
+        token_response = await client.post(admin_token_url, data=token_data)
+        if token_response.status_code != 200:
+            raise HTTPException(status_code=500, detail="Usuario creado, pero error al obtener el token")
+
+        return token_response.json()
+
