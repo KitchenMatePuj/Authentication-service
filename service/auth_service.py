@@ -15,9 +15,6 @@ async def authenticate_user(form_data: OAuth2PasswordRequestForm):
         "password": form_data.password,
     }
 
-    print(form_data.username)
-    print(form_data.password)
-
     async with httpx.AsyncClient() as client:
         response = await client.post(token_url, data=data)
 
