@@ -17,6 +17,7 @@ def get_admin_token():
         "Content-Type": "application/x-www-form-urlencoded"
     }
 
+    print(headers)
     response = requests.post(token_url, data=data, headers=headers)
 
     if response.status_code == 200:
