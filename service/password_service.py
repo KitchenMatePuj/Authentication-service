@@ -5,7 +5,7 @@ from applicationProperties import ApplicationProperties
 
 def get_admin_token():
     token_url = f"{ApplicationProperties.KEYCLOAK_URL}/realms/master/protocol/openid-connect/token"
-    print(token_url)
+    
     data = {
         "grant_type": "password",
         "client_id": "admin-cli",
@@ -19,7 +19,7 @@ def get_admin_token():
         "Content-Type": "application/x-www-form-urlencoded"
     }
 
-    print(data)
+    
     response = requests.post(token_url, data=data, headers=headers)
 
     if response.status_code == 200:
