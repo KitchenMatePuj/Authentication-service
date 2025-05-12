@@ -4,7 +4,6 @@ from fastapi.security import OAuth2PasswordRequestForm
 from applicationProperties import ApplicationProperties
 
 async def authenticate_user(form_data: OAuth2PasswordRequestForm):
-    print("Entro")
     token_url = f"{ApplicationProperties.KEYCLOAK_URL}/realms/{ApplicationProperties.REALM_NAME}/protocol/openid-connect/token"
 
     data = {
