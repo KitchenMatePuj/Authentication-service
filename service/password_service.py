@@ -5,13 +5,15 @@ from applicationProperties import ApplicationProperties
 
 def get_admin_token():
     token_url = f"{ApplicationProperties.KEYCLOAK_URL}/realms/master/protocol/openid-connect/token"
-
+    print(token_url)
     data = {
         "grant_type": "password",
         "client_id": "admin-cli",
         "username": ApplicationProperties.KEYCLOAK_ADMIN_USERNAME,
         "password": ApplicationProperties.KEYCLOAK_ADMIN_PASSWORD
     }
+
+    
 
     headers = {
         "Content-Type": "application/x-www-form-urlencoded"
